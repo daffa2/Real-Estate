@@ -1,0 +1,107 @@
+<html lang="en" hola_ext_inject="ready">
+
+<head>
+    <title>upload estate</title>
+    <link href="../3rdPartyScripts/bootstrap-3.3.4-dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="../3rdPartyScripts/bootstrap-3.3.4-dist/css/bootstrap.css" rel="stylesheet">
+
+    <!--    Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+
+    <script src="../3rdPartyScripts/bootstrap-3.3.4-dist/js/bootstrap.js" type="text/javascript"></script>
+
+    <!--angular-->
+    <script src="../3rdPartyScripts/angular/angular.js" type="text/javascript"></script>
+    <script src="../3rdPartyScripts/angular/angular-cookie.js" type="text/javascript"></script>
+    <script src="../3rdPartyScripts/angular/angular-base64-upload.js" type="text/javascript"></script>
+
+    <!--    App script-->
+    <script src="../AppScript/Moduls.js" type="text/javascript"></script>
+    <script src="../AppScript/Services.js" type="text/javascript"></script>
+    <script src="../AppScript/Controllers.js" type="text/javascript"></script>
+
+</head>
+
+<body hola-ext-player="1" ng-app="realEstateApp">
+    <br>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../Pages/Home.html"><strong>Mother Real Estate Admin</strong></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="../AdminPages/UploadEstate.html">upload estate</a>
+                        </li>
+                        <li class=""><a href="../Pages/Home.html">delete estate</a>
+                        </li>
+                        <li class=""><a href="../Pages/Home.html">regular site</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main component for a primary marketing message or call to action -->
+        <div ng-controller="UploadCtrl">
+            <h3>Upload Estate</h3>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="input-16">Price:</label>
+                    <input type="number" class="form-control" placeholder="Price" ng-model="uploadEstate.Price">
+
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="input-18">Looking For</label>
+                    <select id="input-18" class="form-control" ng-options="opt for opt in lookingFor" ng-model="uploadEstate.LookingFor">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>Rooms</label>
+                    <input type="number" class="form-control" placeholder="Rooms" ng-model="uploadEstate.RoomsNumber">
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>Area</label>
+                    <input type="number" class="form-control" placeholder="Area" ng-model="uploadEstate.Area">
+
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="input-14">Property Type</label>
+                    <select id="input-14" class="form-control" ng-options="prop for prop in properties" ng-model="uploadEstate.PropertyType">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="input-17">Description</label>
+                    <input type="text" class="form-control" id="input-17" placeholder="Type Something" ng-model="uploadEstate.Desc">
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <br>
+                    <input type="file" ng-model="files" name="files" base-sixty-four-input multiple accept="image/*, .zip" minsize="0" required minnum="1">
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <br>
+                    <input type="button" class="btn btn-info" value="Upload " ng-click="ClickedOnUpload()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

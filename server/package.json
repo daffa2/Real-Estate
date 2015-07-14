@@ -1,0 +1,17 @@
+{
+  "name": "node-server-motherrealestate",
+  "version": "1.0.0",
+  "description": "node server",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.1",
+    "mongodb": "~2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "david lavy",
+  "license": "ISC"
+}

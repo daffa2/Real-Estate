@@ -1,0 +1,187 @@
+<html>
+
+<head>
+    <title>Show Property</title>
+    <script src="../3rdPartyScripts/jquery-2.1.3.js" type="text/javascript"></script>
+
+    <!--    bootstrap!-->
+    <link href="../3rdPartyScripts/bootstrap-3.3.4-dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="../3rdPartyScripts/bootstrap-3.3.4-dist/css/bootstrap.css" rel="stylesheet">
+    <script src="../3rdPartyScripts/bootstrap-3.3.4-dist/js/bootstrap.js" type="text/javascript"></script>
+
+    <!--angular-->
+    <script src="../3rdPartyScripts/angular/angular.js" type="text/javascript"></script>
+    <script src="../3rdPartyScripts/angular/angular-cookie.js" type="text/javascript"></script>
+
+    <!--    App script-->
+    <script src="../AppScript/Moduls.js" type="text/javascript"></script>
+    <script src="../AppScript/Services.js" type="text/javascript"></script>
+    <script src="../AppScript/Controllers.js" type="text/javascript"></script>
+
+    <style>
+        .carousel-inner > .item > img {
+            margin: auto;
+            height: 250px;
+            width: 350px;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="container" ng-app="realEstateApp" ng-controller="ShowPropCtrl">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../Pages/Home.html"><strong>Mother Real Estate</strong></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../Pages/Home.html">Home</a>
+                        </li>
+                        <li><a href="../Pages/ForSale.html">For Sale</a>
+                        </li>
+                        <li class="active"><a href="../Pages/ShowProperty.html">Show Property</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="col-md-8 col-sm-8">
+            <!-- Nav tab style 1 starts -->
+            <div class="nav-tabs-one">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#details-nav" data-toggle="tab">Details</a>
+                    </li>
+                    <li><a href="#agent-nav" data-toggle="tab">Agent Details</a>
+                    </li>
+                </ul>
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="details-nav">
+
+                        <!-- Real estate property item -->
+                        <div class="single-property">
+
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="{{$index}}" class="carousel-indicator" ng-repeat="img in estate.Images"></li>
+                                </ol>
+
+                                <!-- Wrappier for slides -->
+                                <div class="carousel-inner" role="listbox">
+
+                                    <div class="moving-items item" ng-repeat="img in estate.Images">
+                                        <img ng-src="{{estate.Images[$index]}}" width="460" height="345">
+                                    </div>
+
+                                </div>
+
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- heading -->
+                        <div ng-show="estate.Address != '' && estate.Address != undefined">
+                            <h4>Address:</h4>
+                            <p>{{estate.Address}}</p>
+                        </div>
+                        <hr>
+                        <h4>Property Details:</h4>
+                        <!-- paragraph -->
+                        <p>{{estate.Details}}</p>
+                        <hr>
+
+                        <h4>City:</h4>
+                        <!-- paragraph -->
+                        <p>{{estate.City}}</p>
+
+                        <hr>
+
+                        <h4>Status:</h4>
+                        <!-- paragraph -->
+                        <p>{{estate.StatusStr}}</p>
+
+                        <hr>
+                        <h4>Room Number:</h4>
+                        <!-- paragraph -->
+                        <p>{{estate.RoomNumber}}</p>
+
+                        <hr>
+
+                        <div ng-show="estate.Price != undefined">
+                            <h4>Price:</h4>
+                            <p>{{estate.Price}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="agent-nav">
+                        <!-- Single property page Agent Details -->
+                        <div class="single-property sp-agent">
+                            <!-- agent image -->
+                            <img class="img-responsive img-thumbnail" src="../Images/agent.jpg" alt="" style="width:50%">
+                            <!-- Agent Company name / heading -->
+                            <h4><strong>Name: </strong>{{estate.Agent.Name}}</h4>
+                            <!-- Agent name / heading -->
+                            <h5><strong>Phone Number: </strong>{{estate.Agent.Number}}</h5>
+                            <h5><strong>Email: </strong>{{estate.Agent.Email}}</h5>
+                            <!-- Agent details in table -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <div class="col-md-4 col-sm-4">
+
+            <!-- Take action sidebar block -->
+            <div class="sidebar">
+
+                <!-- Hot Properties Widget -->
+                <div class="s-widget">
+                    <!-- Heading -->
+                    <hr>
+                    <h5>&nbsp;<strong>Another Properties:</strong></h5>
+                    <!-- Widgets Content -->
+                    <div class="widget-content hot-properties">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="tmpEstate in estates">
+                                <!-- Image -->
+                                <img class="img-responsive img-thumbnail" ng-src="{{tmpEstate.Images[0]}}" style="width:170px">
+                                <!-- Heading -->
+                                <h4><a href="">{{tmpEstate.Address}}</a></h4>
+                                <!-- Price -->
+                                <div class="price"><strong>Price</strong>: {{tmpEstate.Price}},&nbsp; <strong>Rooms:</strong>: {{tmpEstate.RoomNumber}}
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
