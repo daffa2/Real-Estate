@@ -194,7 +194,7 @@
 
     angular.module('realEstateApp').controller('ShowPropCtrl', ['$scope', 'ipCookie', 'ServerService', 'GetTypeService', ShowPropCtrl]);
 
-    var UploadCtrl = function ($scope, ServerService, GetTypeService) {
+    var UploadCtrl = function ($scope, ServerService, GetTypeService,fileUpload) {
         $scope.lookingFor = ["Rent", "Sale", "Both"];
         $scope.properties = ["Any", "Duplex", "House", "Apartment"];
 
@@ -209,9 +209,12 @@
 
         $scope.ClickedOnUpload = function () {
             //            $scope.initPhotos();
-            console.log($scope.uploadEstate);
-            ServerService.PostEstate($scope.uploadEstate);
 
+            console.log($scope.uploadEstate);
+            console.log($scope.myFile);
+
+            //ServerService.PostEstate($scope.uploadEstate);
+            fileUpload.uploadFileToServer($scope.myFile);
         };
 
         $scope.SendPhotos = function (id) {
@@ -232,5 +235,5 @@
 
 
 
-    angular.module('realEstateApp').controller('UploadCtrl', ['$scope', 'ServerService', 'GetTypeService', UploadCtrl]);
-})()
+    angular.module('realEstateApp').controller('UploadCtrl', ['$scope', 'ServerService', 'GetTypeService', 'fileUpload', UploadCtrl]);
+})();

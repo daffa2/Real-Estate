@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.13.1",
-    "mongodb": "~2.0"
+    "mongodb": "~2.0",
+    "multer": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -13,5 +14,13 @@
     "start": "node server.js"
   },
   "author": "david lavy",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daffa2/Real-Estate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/daffa2/Real-Estate/issues"
+  },
+  "homepage": "https://github.com/daffa2/Real-Estate#readme"
 }

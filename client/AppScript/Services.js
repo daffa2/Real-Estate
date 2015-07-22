@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     var CustInfoService = function ($http, serverLocation) {
         var custInfoService = function () {
             var self = this;
@@ -6,14 +6,14 @@
             self.SendCustToServer = function (customer) {
                 console.log(serverLocation);
                 $http.post(serverLocation + 'customer', customer).
-                success(function (data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                });
+                    success(function (data, status, headers, config) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                    }).
+                    error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
             };
         };
         return {
@@ -26,7 +26,7 @@
         var self = this;
         self.GetAllEstates = function () {
             $http.get(serverLocation + 'estate/123').
-            success(
+                success(
                 function (data) {
                     data.map(function (item) {
                         $http.get(serverLocation + 'image?dirName=' + item.DirName)
@@ -43,11 +43,11 @@
                     })
                 }
             ).error(function () {
-                $rootScope.$broadcast('GotEstates', {
-                    data: undefined,
-                    IsSucceded: false
+                    $rootScope.$broadcast('GotEstates', {
+                        data: undefined,
+                        IsSucceded: false
+                    })
                 })
-            })
         };
 
         self.GetSpecificImage = function (dirName, index) {
@@ -64,7 +64,7 @@
                         IsSucceded: false
                     })
                 });
-        }
+        };
 
         self.GetAgent = function (agentId) {
             $http.get(serverLocation + 'agent/' + agentId)
@@ -79,12 +79,12 @@
                         IsSucceded: false
                     })
                 });
-        }
+        };
 
         self.GetSpecificEstateWithLessOptions = function (options) {
             $http.get(serverLocation + 'SearchForEstates?city=' + options.City + '&minPrice=' +
                 options.MinPrice + '&maxPrice=' + options.MaxPrice + '&lookingFor=' + options.LookingFor).
-            success(
+                success(
                 function (data) {
                     data.map(function (item) {
                         $http.get(serverLocation + 'image?dirName=' + item.DirName)
@@ -101,11 +101,11 @@
                     })
                 }
             ).error(function () {
-                $rootScope.$broadcast('GotEstates', {
-                    data: undefined,
-                    IsSucceded: false
+                    $rootScope.$broadcast('GotEstates', {
+                        data: undefined,
+                        IsSucceded: false
+                    })
                 })
-            })
         };
 
         self.PostEstate = function (estate) {
@@ -124,7 +124,7 @@
                         IsSucceded: false
                     })
                 });
-        }
+        };
 
         self.UploadPhotos = function (photo) {
             console.log(serverLocation + 'uploadPhoto');
@@ -136,7 +136,7 @@
                     console.error('there was error with uploading the photo', err);
                 });
         }
-    }
+    };
 
     angular.module('realEstateApp').service('ServerService', ['$http', 'serverLocation', '$rootScope', ServerService]);
 
@@ -156,4 +156,22 @@
     };
 
     angular.module('realEstateApp').service('GetTypeService', [GetTypeService]);
-})()
+
+    angular.module('realEstateApp').service('fileUpload', ['$http','serverLocation', function ($http,serverLocation) {
+        this.uploadFileToServer = function(file){
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(serverLocation +'image', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+                .success(function(){
+                    console.log('uploaded the image');
+                })
+                .error(function(){
+                    console.log('there was an error with uploading the image');
+                });
+        }
+    }]);
+
+})(angular);

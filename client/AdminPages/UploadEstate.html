@@ -19,6 +19,7 @@
     <script src="../AppScript/Moduls.js" type="text/javascript"></script>
     <script src="../AppScript/Services.js" type="text/javascript"></script>
     <script src="../AppScript/Controllers.js" type="text/javascript"></script>
+    <script src="../AppScript/Directive.js" type="text/javascript"></script>
 
 </head>
 
@@ -90,9 +91,17 @@
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <br>
-                    <input type="file" ng-model="files" name="files" base-sixty-four-input multiple accept="image/*, .zip" minsize="0" required minnum="1">
+                    file
+                    <input id="fileUploader" type="file" file-model="myFile">
                 </div>
             </div>
+            <!--<div class="col-md-3 col-sm-6">-->
+                <!--<div class="form-group">-->
+                    <!--<br>-->
+                    <!--<input type="file" ng-model="files" name="files" base-sixty-four-input multiple accept="image/*, .zip" minsize="0" required minnum="1">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!-- -->
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <br>
